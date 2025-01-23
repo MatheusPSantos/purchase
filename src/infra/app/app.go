@@ -9,10 +9,12 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/matheuspsantos/purchase-wex/src/infra/configs/database"
 	"github.com/matheuspsantos/purchase-wex/src/infra/router"
 )
 
 func RunApplication() {
+	database.ConnectDatabase()
 	sm := router.NewRouter(mux.NewRouter())
 
 	s := &http.Server{
