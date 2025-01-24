@@ -1,15 +1,16 @@
-version: '3'
+version: '3.8'
 services:
   postgres:
-    image: "postgres:14"
+    image: postgres:15
+    container_name: postgres_container_wex
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=purchase     
+      POSTGRES_USER: wex
+      POSTGRES_PASSWORD: wex
+      POSTGRES_DB: wex    
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data  
+      - postgres_data:/var/lib/postgresql/data  
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -20,4 +21,6 @@ services:
       - "54321:80"
     depends_on:
       - postgres
+volumes:
+  postgres_data:
 

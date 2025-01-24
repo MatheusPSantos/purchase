@@ -1,9 +1,9 @@
-package database
+package configs
 
 import (
 	"log"
 
-	"github.com/matheuspsantos/purchase-wex/src/core/entities"
+	"github.com/matheuspsantos/purchase-wex/src/core/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -14,12 +14,13 @@ var (
 )
 
 func ConnectDatabase() {
-	strCon := "host=localhost user=root password=root dbname=purchase port=5432 sslmod=disable"
+	strCon := "host=172.23.0.2 user=wex password=wex dbname=wex port=5432 sslmode=disable"
+
 	log.Println("Oppening connection with database...")
 	DB, err = gorm.Open(postgres.Open(strCon))
 	if err != nil {
-		log.Panic("[ERROR] Database connetion failed. ", err)
+		log.Panic("[ERROR] Database connetion fail.", err)
 	}
 	log.Println("Migrating entities...")
-	DB.AutoMigrate(&entities.Purchase{})
+	DB.AutoMigrate(&models.Purchase{})
 }

@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/matheuspsantos/purchase-wex/src/infra/app"
+	"github.com/matheuspsantos/purchase-wex/src/infra"
 )
 
 func main() {
 	log.Println("Running application")
-	app.RunApplication()
+	infra.RunApplication()
 }

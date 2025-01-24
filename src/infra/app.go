@@ -1,4 +1,4 @@
-package app
+package infra
 
 import (
 	"context"
@@ -9,13 +9,14 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/matheuspsantos/purchase-wex/src/infra/configs/database"
-	"github.com/matheuspsantos/purchase-wex/src/infra/router"
+
+	"github.com/matheuspsantos/purchase-wex/src/infra/configs"
+	"github.com/matheuspsantos/purchase-wex/src/infra/routers"
 )
 
 func RunApplication() {
-	database.ConnectDatabase()
-	sm := router.NewRouter(mux.NewRouter())
+	configs.ConnectDatabase()
+	sm := routers.NewRouter(mux.NewRouter())
 
 	s := &http.Server{
 		Addr:         ":9090",
