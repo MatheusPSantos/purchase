@@ -10,7 +10,6 @@ import (
 
 func StorePurchaseTransaction(w http.ResponseWriter, r *http.Request) {
 	log.Print("Storing purchase transaction")
-
 	res, err := usecases.StoreNewPurchaseTransactionUseCase(r.Body)
 	if err != nil {
 		log.Println(err)
@@ -31,6 +30,7 @@ func GetPurchaseTransaction(w http.ResponseWriter, r *http.Request) {
 
 func ListAllPurchaseTransactions(w http.ResponseWriter, r *http.Request) {
 	res := usecases.ListAllPurchaseTransactionsUseCase()
+
 	if err := json.NewEncoder(w).Encode(res); err != nil {
 		log.Printf("JSON encoding error: %v", err)
 		http.Error(w, "Failed to encode response", http.StatusInternalServerError)

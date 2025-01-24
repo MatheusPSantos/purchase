@@ -5,7 +5,6 @@ import (
 
 	"github.com/matheuspsantos/purchase-wex/src/core/models"
 	database "github.com/matheuspsantos/purchase-wex/src/infra/configs"
-	"gorm.io/gorm"
 )
 
 func StoreNewPurchaseTransactionUseCase(p *models.Purchase) (**models.Purchase, error) {
@@ -18,6 +17,7 @@ func StoreNewPurchaseTransactionUseCase(p *models.Purchase) (**models.Purchase, 
 	return stored, nil
 }
 
-func ListAllPurchaseTransactionUseCase(p *[]models.Purchase) *gorm.DB {
-	return database.DB.Find(p)
+func ListAllPurchaseTransactionUseCase(p *[]models.Purchase) *[]models.Purchase {
+	database.DB.Find(p)
+	return p
 }
