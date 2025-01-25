@@ -1,0 +1,14 @@
+bin/
+*.exe
+*.out
+*.a
+vendor/
+*.swp
+*.swo
+.idea/
+.vscode/
+*.log
+*.tmp
+*.bak
+*.env
+*.test

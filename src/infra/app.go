@@ -19,7 +19,7 @@ func RunApplication() {
 	sm := routers.NewRouter(mux.NewRouter())
 
 	s := &http.Server{
-		Addr:         ":9090",
+		Addr:         ":8888",
 		Handler:      sm,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  1 * time.Second,

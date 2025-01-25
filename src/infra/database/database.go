@@ -1,7 +1,9 @@
 package database
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/matheuspsantos/purchase-wex/src/core/models"
 	"gorm.io/driver/postgres"
@@ -14,8 +16,14 @@ var (
 )
 
 func ConnectDatabase() {
-	strCon := "host=172.23.0.2 user=wex password=wex dbname=wex port=5432 sslmode=disable"
-
+	strCon := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=UTC",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("DB_PORT"),
+	)
 	log.Println("Oppening connection with database...")
 	DB, err = gorm.Open(postgres.Open(strCon))
 	if err != nil {
