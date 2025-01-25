@@ -21,3 +21,8 @@ func ListAllPurchaseTransactionUseCase(p *[]models.Purchase) *[]models.Purchase 
 	database.DB.Find(p)
 	return p
 }
+
+func FindPurchaseById(id string, p *models.Purchase) *models.Purchase {
+	database.DB.First(p, id)
+	return p
+}
