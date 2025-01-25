@@ -1,4 +1,4 @@
-package configs
+package database
 
 import (
 	"log"
@@ -23,4 +23,18 @@ func ConnectDatabase() {
 	}
 	log.Println("Migrating entities...")
 	DB.AutoMigrate(&models.Purchase{})
+}
+
+func CloseDatabase() {
+	sqlDB, err := DB.DB()
+	if err != nil {
+		log.Printf("Error retrieving SQL database: %v", err)
+		return
+	}
+
+	if err := sqlDB.Close(); err != nil {
+		log.Printf("Error closing database connection: %v", err)
+	} else {
+		log.Println("Database connection closed.")
+	}
 }

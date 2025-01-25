@@ -10,12 +10,12 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/matheuspsantos/purchase-wex/src/infra/configs"
+	"github.com/matheuspsantos/purchase-wex/src/infra/database"
 	"github.com/matheuspsantos/purchase-wex/src/infra/routers"
 )
 
 func RunApplication() {
-	configs.ConnectDatabase()
+	database.ConnectDatabase()
 	sm := routers.NewRouter(mux.NewRouter())
 
 	s := &http.Server{
@@ -33,16 +33,19 @@ func RunApplication() {
 		}
 	}()
 
-	sigChan := make(chan os.Signal)
-	signal.Notify(sigChan, os.Interrupt)
-	signal.Notify(sigChan, os.Kill)
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, os.Kill)
 
 	sig := <-sigChan
 	log.Println("Received terminate, graceful shutdown", sig)
 
-	tc, err := context.WithTimeout(context.Background(), 30*time.Second)
-	if err != nil {
-		log.Fatalln(err)
+	tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	if err := s.Shutdown(tc); err != nil {
+		log.Printf("Error shutting down server: %v", err)
 	}
-	s.Shutdown(tc)
+
+	database.CloseDatabase()
+	log.Println("Application shutdown complete.")
 }

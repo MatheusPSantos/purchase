@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/matheuspsantos/purchase-wex/src/core/models"
-	database "github.com/matheuspsantos/purchase-wex/src/infra/configs"
+	"github.com/matheuspsantos/purchase-wex/src/infra/database"
 )
 
 func StoreNewPurchaseTransactionUseCase(p *models.Purchase) (**models.Purchase, error) {
