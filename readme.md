@@ -51,6 +51,11 @@ chmod +x start.sh
 ./start.sh
 ```
 
+### To run application in go run mode
+  ```bash
+  DB_HOST=$PG_CONTAINER_IP DB_PORT=5432 DB_NAME=wex DB_USER=wex DB_PASSWORD=wex go run main.go
+  ```
+
 The application will be started automatically, including the database and PgAdmin.
 
 ### Available Endpoints
@@ -87,6 +92,13 @@ Request example:
 curl --request GET \
 --url http://localhost:8888/purchase
 ```
+
+> 4. List all possible country currency
+  ```bash
+  curl --request GET \
+    --url http://localhost:8888/currency \
+    --header 'User-Agent: insomnia/10.1.1'
+  ```
 
 ### Accessing PgAdmin
 1. Access PgAdmin at http://localhost:54321.

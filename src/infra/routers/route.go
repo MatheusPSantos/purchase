@@ -18,6 +18,7 @@ func NewRouter(route *mux.Router) *mux.Router {
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
 	getRouter.HandleFunc("/purchase/{id}", entrypoints_rest.GetPurchaseTransaction)
 	getRouter.HandleFunc("/purchase", entrypoints_rest.ListAllPurchaseTransactions)
+	getRouter.HandleFunc("/currency", entrypoints_rest.GetAllCurrenciesSupported)
 
 	postRotuer := sm.Methods(http.MethodPost).Subrouter()
 	postRotuer.HandleFunc("/purchase", entrypoints_rest.StorePurchaseTransaction)
